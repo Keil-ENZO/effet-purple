@@ -129,10 +129,10 @@ export const SmoothOrbitControls = () => {
       } else if (scope.object instanceof THREE.OrthographicCamera) {
         // orthographic
         scope.panLeft(
-          (deltaX * (scope.object.right - scope.object.left)) / screenWidth
+            (deltaX * (scope.object.right - scope.object.left)) / screenWidth
         );
         scope.panUp(
-          (deltaY * (scope.object.top - scope.object.bottom)) / screenHeight
+            (deltaY * (scope.object.top - scope.object.bottom)) / screenHeight
         );
       } else {
         // camera neither orthographic or perspective
@@ -144,8 +144,8 @@ export const SmoothOrbitControls = () => {
         scale /= dollyScale;
       } else if (scope.object instanceof THREE.OrthographicCamera) {
         scope.object.zoom = Math.max(
-          this.minZoom,
-          Math.min(this.maxZoom, this.object.zoom * dollyScale)
+            this.minZoom,
+            Math.min(this.maxZoom, this.object.zoom * dollyScale)
         );
         scope.object.updateProjectionMatrix();
         zoomChanged = true;
@@ -158,8 +158,8 @@ export const SmoothOrbitControls = () => {
         scale *= dollyScale;
       } else if (scope.object instanceof THREE.OrthographicCamera) {
         scope.object.zoom = Math.max(
-          this.minZoom,
-          Math.min(this.maxZoom, this.object.zoom / dollyScale)
+            this.minZoom,
+            Math.min(this.maxZoom, this.object.zoom / dollyScale)
         );
         scope.object.updateProjectionMatrix();
         zoomChanged = true;
@@ -172,8 +172,8 @@ export const SmoothOrbitControls = () => {
 
       // so camera.up is the orbit axis
       var quat = new THREE.Quaternion().setFromUnitVectors(
-        object.up,
-        new THREE.Vector3(0, 1, 0)
+          object.up,
+          new THREE.Vector3(0, 1, 0)
       );
       var quatInverse = quat.clone().invert();
 
@@ -195,8 +195,8 @@ export const SmoothOrbitControls = () => {
         // angle from y-axis
 
         phi = Math.atan2(
-          Math.sqrt(offset.x * offset.x + offset.z * offset.z),
-          offset.y
+            Math.sqrt(offset.x * offset.x + offset.z * offset.z),
+            offset.y
         );
 
         theta += thetaDelta;
@@ -204,8 +204,8 @@ export const SmoothOrbitControls = () => {
 
         // restrict theta to be between desired limits
         theta = Math.max(
-          this.minAzimuthAngle,
-          Math.min(this.maxAzimuthAngle, theta)
+            this.minAzimuthAngle,
+            Math.min(this.maxAzimuthAngle, theta)
         );
 
         // restrict phi to be between desired limits
@@ -249,9 +249,9 @@ export const SmoothOrbitControls = () => {
         // using small-angle approximation cos(x/2) = 1 - x^2 / 8
 
         if (
-          zoomChanged ||
-          lastPosition.distanceToSquared(this.object.position) > EPS ||
-          8 * (1 - lastQuaternion.dot(this.object.quaternion)) > EPS
+            zoomChanged ||
+            lastPosition.distanceToSquared(this.object.position) > EPS ||
+            8 * (1 - lastQuaternion.dot(this.object.quaternion)) > EPS
         ) {
           lastPosition.copy(this.object.position);
           lastQuaternion.copy(this.object.quaternion);
@@ -379,9 +379,9 @@ export const SmoothOrbitControls = () => {
     // right and down are positive
     function pan(deltaX, deltaY) {
       var element =
-        scope.domElement === document
-          ? scope.domElement.body
-          : scope.domElement;
+          scope.domElement === document
+              ? scope.domElement.body
+              : scope.domElement;
 
       constraint.pan(deltaX, deltaY, element.clientWidth, element.clientHeight);
     }
@@ -455,9 +455,9 @@ export const SmoothOrbitControls = () => {
       event.preventDefault();
 
       var element =
-        scope.domElement === document
-          ? scope.domElement.body
-          : scope.domElement;
+          scope.domElement === document
+              ? scope.domElement.body
+              : scope.domElement;
 
       if (state === STATE.ROTATE) {
         if (scope.enableRotate === false) return;
@@ -467,13 +467,13 @@ export const SmoothOrbitControls = () => {
 
         // rotating across whole screen goes 360 degrees around
         constraint.rotateLeft(
-          ((2 * Math.PI * rotateDelta.x) / element.clientWidth) *
+            ((2 * Math.PI * rotateDelta.x) / element.clientWidth) *
             scope.rotateSpeed
         );
 
         // rotating up and down along whole screen attempts to go 360, but limited to 180
         constraint.rotateUp(
-          ((2 * Math.PI * rotateDelta.y) / element.clientHeight) *
+            ((2 * Math.PI * rotateDelta.y) / element.clientHeight) *
             scope.rotateSpeed
         );
 
@@ -516,9 +516,9 @@ export const SmoothOrbitControls = () => {
 
     function onMouseWheel(event) {
       if (
-        scope.enabled === false ||
-        scope.enableZoom === false ||
-        state !== STATE.NONE
+          scope.enabled === false ||
+          scope.enableZoom === false ||
+          state !== STATE.NONE
       )
         return;
 
@@ -562,9 +562,9 @@ export const SmoothOrbitControls = () => {
 
     function onKeyDown(event) {
       if (
-        scope.enabled === false ||
-        scope.enableKeys === false ||
-        scope.enablePan === false
+          scope.enabled === false ||
+          scope.enableKeys === false ||
+          scope.enablePan === false
       )
         return;
 
@@ -636,9 +636,9 @@ export const SmoothOrbitControls = () => {
       event.stopPropagation();
 
       var element =
-        scope.domElement === document
-          ? scope.domElement.body
-          : scope.domElement;
+          scope.domElement === document
+              ? scope.domElement.body
+              : scope.domElement;
 
       switch (event.touches.length) {
         case 1: // one-fingered touch: rotate
@@ -650,12 +650,12 @@ export const SmoothOrbitControls = () => {
 
           // rotating across whole screen goes 360 degrees around
           constraint.rotateLeft(
-            ((2 * Math.PI * rotateDelta.x) / element.clientWidth) *
+              ((2 * Math.PI * rotateDelta.x) / element.clientWidth) *
               scope.rotateSpeed
           );
           // rotating up and down along whole screen attempts to go 360, but limited to 180
           constraint.rotateUp(
-            ((2 * Math.PI * rotateDelta.y) / element.clientHeight) *
+              ((2 * Math.PI * rotateDelta.y) / element.clientHeight) *
               scope.rotateSpeed
           );
 
@@ -721,9 +721,9 @@ export const SmoothOrbitControls = () => {
       this.domElement.removeEventListener("mousedown", onMouseDown, false);
       this.domElement.removeEventListener("mousewheel", onMouseWheel, false);
       this.domElement.removeEventListener(
-        "MozMousePixelScroll",
-        onMouseWheel,
-        false
+          "MozMousePixelScroll",
+          onMouseWheel,
+          false
       ); // firefox
 
       this.domElement.removeEventListener("touchstart", touchstart, false);
@@ -741,9 +741,9 @@ export const SmoothOrbitControls = () => {
     this.domElement.addEventListener("mousedown", onMouseDown, false);
     this.domElement.addEventListener("mousewheel", onMouseWheel, false);
     this.domElement.addEventListener(
-      "MozMousePixelScroll",
-      onMouseWheel,
-      false
+        "MozMousePixelScroll",
+        onMouseWheel,
+        false
     ); // firefox
 
     this.domElement.addEventListener("touchstart", touchstart, false);
@@ -757,7 +757,7 @@ export const SmoothOrbitControls = () => {
   };
 
   THREE.SmoothOrbitControls.prototype = Object.create(
-    THREE.EventDispatcher.prototype
+      THREE.EventDispatcher.prototype
   );
   THREE.SmoothOrbitControls.prototype.constructor = THREE.SmoothOrbitControls;
 
